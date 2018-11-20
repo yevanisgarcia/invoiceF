@@ -1,0 +1,98 @@
+@page
+@model invoiceF.Pages.Invoices.IndexModel
+
+@{
+    ViewData["Title"] = "Invoices";
+}
+
+<h2>Invoices</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort"
+                   asp-route-currentFilter="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Invoice[0].ServiceName)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].ServiceCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].ServiceDescription)
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort">
+                    @Html.DisplayNameFor(model => model.Invoice[0].InvoiceCreatedAt)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].Customer)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Invoice)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InvoiceCreatedAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.CustomerName)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.InvoiceID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.InvoiceID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.InvoiceID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.Invoice.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Invoice.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Invoice.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Invoice.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>

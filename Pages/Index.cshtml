@@ -1,0 +1,40 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="jumbotron">
+    <h1>Invoices Management System</h1>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h2>Welcome to Invoices Management System</h2>
+        <p>
+            Invoices Management System is a app for doing Invoices.
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h3>View customers</h3>
+        <p>You can view and create customers.</p>
+        <p>
+            <a class="btn btn-default"
+               asp-page="/Customers/Index">
+                Here &raquo;
+            </a>
+        </p>
+
+    </div>
+    <div class="col-md-4">
+        <h3>View invoices</h3>
+        <p>You can view and create invoices.</p>
+        <p>
+            <a class="btn btn-default"
+               asp-page="/Invoices/Index">
+                Here &raquo;
+            </a>
+        </p>
+
+
+    </div>
+</div>

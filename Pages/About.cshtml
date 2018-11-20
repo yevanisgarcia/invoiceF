@@ -1,0 +1,36 @@
+﻿@page
+@model AboutModel
+@{
+    ViewData["Title"] = "Invoices count statistics";
+}
+<h2>Invoices Statistics</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./About" asp-route-sortOrder="@Model.DateSort">
+                    Invoices Date
+                </a>
+            </th>
+            <th>
+                Invoices
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.Invoice)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InvoiceCreatedAt)
+                </td>
+                <td>
+                    @item.InvoiceCount
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

@@ -1,0 +1,75 @@
+@page "{id:int?}"
+@model invoiceF.Pages.Customers.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.BusinessName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.BusinessName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.CustomerPhone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.CustomerPhone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.CustomerEmail)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.CustomerEmail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.Invoices)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Service Offered</th>
+                    <th>Price</th>
+                    <th>Date</th>
+                </tr>
+                @foreach (var item in Model.Customer.Invoices)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ServiceName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ServiceCost)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InvoiceCreatedAt)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Customer.CustomerID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
